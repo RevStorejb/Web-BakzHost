@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAKZ HOSTING</title>
+  <style>
+    body {
+      background: #121212;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .produk {
+      background: #1f1f1f;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .produk h2 {
+      color: #03a9f4;
+      margin-top: 0;
+    }
+    .btn {
+      background: #2196f3;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #checkout {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: green;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 30px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BAKZ HOSTING</h1>
+    <p style="text-align: center;">Solusi Hosting Terbaik untuk Anda</p>
+
+    <div class="produk">
+      <h2>CPANEL BAKZ V1.2</h2>
+      <p>Script cpanel versi biasa dengan fitur 50% Button</p>
+      <p><strong>Rp 5.000</strong></p>
+      <button class="btn" onclick="addToCart('CPANEL BAKZ V1.2', '5000')">+ Keranjang</button>
+    </div>
+
+    <div class="produk">
+      <h2>CPANEL BAKZ V1.3</h2>
+      <p>Script cpanel versi premium dengan fitur 80% Button</p>
+      <p><strong>Rp 10.000</strong></p>
+      <button class="btn" onclick="addToCart('CPANEL BAKZ V1.3', '10000')">+ Keranjang</button>
+    </div>
+
+    <div class="produk">
+      <h2>CPANEL BAKZ V1.4</h2>
+      <p>Script cpanel versi full button 100%</p>
+      <p><strong>Rp 15.000</strong></p>
+      <button class="btn" onclick="addToCart('CPANEL BAKZ V1.4', '15000')">+ Keranjang</button>
+    </div>
+  </div>
+
+  <button id="checkout" onclick="checkout()">Checkout via WhatsApp</button>
+
+  <script>
+    let cart = [];
+
+    function addToCart(nama, harga) {
+      cart = [{ nama, harga }];
+      alert(nama + ' telah dimasukkan ke keranjang!');
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Silakan pilih produk terlebih dahulu.");
+        return;
+      }
+
+      const produk = cart[0];
+      const pesan = `📢 *PESANAN BARU - BAKZ HOSTING* 📢
+
+Halo Admin Bakz Hosting,
+Saya ingin memesan produk berikut:
+
+📋 *Daftar Pesanan:*
+➡️ ${produk.nama}
+💵 ${produk.harga}
+
+💰 *Total Pembayaran:* Rp ${produk.harga}
+
+🛒 *Metode Pembayaran:*
+1. Transfer Bank
+2. E-Wallet (OVO/DANA/GoPay)
+3. QRIS
+
+Mohon konfirmasi ketersediaan produk dan detail pembayaran.
+Terima kasih! 🙏`;
+
+      const encodedMessage = encodeURIComponent(pesan);
+      const whatsappNumber = "6285962823375"; // Ganti jika nomor admin berbeda
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
+    }
+  </script>
+</body>
+</html>
