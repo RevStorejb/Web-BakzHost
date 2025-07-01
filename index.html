@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BAKZ HOSTING</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       background: #121212;
@@ -31,6 +32,9 @@
       color: #03a9f4;
       margin-top: 0;
     }
+    .produk p {
+      margin: 6px 0;
+    }
     .btn {
       background: #2196f3;
       color: white;
@@ -39,6 +43,9 @@
       border-radius: 5px;
       cursor: pointer;
       margin-top: 10px;
+    }
+    .btn:hover {
+      background: #0d8ddb;
     }
     #checkout {
       position: fixed;
@@ -79,16 +86,34 @@
       <p><strong>Rp 15.000</strong></p>
       <button class="btn" onclick="addToCart('CPANEL BAKZ V1.4', '15000')">+ Keranjang</button>
     </div>
+
+    <div class="produk">
+      <h2>PT SC 20K</h2>
+      <p>> BEBAS RENAME</p>
+      <p>> BEBAS JUALAN SC</p>
+      <p>> DAPET ALL SC NO ENC</p>
+      <p>> FREE UBAH WM</p>
+      <p>> FREE PANEL UNLI</p>
+      <p><a href="https://www.youtube.com/@BakzzRawr" target="_blank" style="color: #03a9f4;">MAU CEK FITUR? CEK YT KU</a></p>
+      <p><strong>Rp 20.000</strong></p>
+      <button class="btn" onclick="addToCart('PT SC 20K', '20000')">+ Keranjang</button>
+    </div>
+
   </div>
 
-  <button id="checkout" onclick="checkout()">Checkout via WhatsApp</button>
+  <button id="checkout" onclick="checkout()">Checkout (0)</button>
 
   <script>
     let cart = [];
 
     function addToCart(nama, harga) {
-      cart = [{ nama, harga }];
+      cart.push({ nama, harga });
       alert(nama + ' telah dimasukkan ke keranjang!');
+      updateCheckoutText();
+    }
+
+    function updateCheckoutText() {
+      document.getElementById("checkout").innerText = `Checkout (${cart.length})`;
     }
 
     function checkout() {
@@ -97,17 +122,21 @@
         return;
       }
 
-      const produk = cart[0];
+      let daftarPesanan = "";
+      let totalHarga = 0;
+      cart.forEach((item, index) => {
+        daftarPesanan += `➡️ ${item.nama} - Rp ${item.harga}\n`;
+        totalHarga += parseInt(item.harga);
+      });
+
       const pesan = `📢 *PESANAN BARU - BAKZ HOSTING* 📢
 
 Halo Admin Bakz Hosting,
 Saya ingin memesan produk berikut:
 
 📋 *Daftar Pesanan:*
-➡️ ${produk.nama}
-💵 ${produk.harga}
-
-💰 *Total Pembayaran:* Rp ${produk.harga}
+${daftarPesanan}
+💰 *Total Pembayaran:* Rp ${totalHarga}
 
 🛒 *Metode Pembayaran:*
 1. Transfer Bank
